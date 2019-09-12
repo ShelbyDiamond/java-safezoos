@@ -4,8 +4,7 @@ import com.lambdaschool.zoos.model.Animal;
 
 import java.util.ArrayList;
 
-public interface AnimalService
-{
+public interface AnimalService {
     ArrayList<Animal> findAll();
 
     Animal findAnimalByType(String type);

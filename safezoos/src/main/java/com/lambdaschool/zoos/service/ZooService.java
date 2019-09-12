@@ -4,8 +4,7 @@ import com.lambdaschool.zoos.model.Zoo;
 
 import java.util.ArrayList;
 
-public interface ZooService
-{
+public interface ZooService {
     ArrayList<Zoo> findAll();
 
     Zoo findZooById(long id);

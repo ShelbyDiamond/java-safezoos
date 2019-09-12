@@ -1,4 +1,4 @@
-package com.lambdaschool.zoos;
+package com.shelbydiamond.safezoos;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ZoosApplicationTests {
+public class SafezoosApplicationTests {
 
     @Test
     public void contextLoads() {

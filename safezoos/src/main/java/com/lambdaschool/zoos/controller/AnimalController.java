@@ -12,24 +12,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/animals")
-public class AnimalController
-{
+public class AnimalController {
     @Autowired
     private AnimalService animalService;
 
     @GetMapping(value = "/animals",
-                produces = {"application/json"})
-    public ResponseEntity<?> listAllAnimals()
-    {
+            produces = {"application/json"})
+    public ResponseEntity<?> listAllAnimals() {
         return new ResponseEntity<>(animalService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{type}",
-                produces = {"application/json"})
+            produces = {"application/json"})
     public ResponseEntity<?> findAnimalByType(
             @PathVariable
-                    String type)
-    {
+                    String type) {
         Animal a = animalService.findAnimalByType(type);
         return new ResponseEntity<>(a, HttpStatus.OK);
     }

@@ -12,15 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/zoos")
-public class ZooController
-{
+public class ZooController {
     @Autowired
     private ZooService zooService;
 
     // GET: localhost:2019/zoos/zoos
     @GetMapping(value = "/zoos", produces = {"application/json"})
-    public ResponseEntity<?> listAllZoos()
-    {
+    public ResponseEntity<?> listAllZoos() {
         return new ResponseEntity<>(zooService.findAll(), HttpStatus.OK);
     }
 }
