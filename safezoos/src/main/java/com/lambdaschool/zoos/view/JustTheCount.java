@@ -1,6 +1,5 @@
 package com.lambdaschool.zoos.view;
 
-public interface JustTheCount
-{
+public interface JustTheCount {
     int getCount();
 }

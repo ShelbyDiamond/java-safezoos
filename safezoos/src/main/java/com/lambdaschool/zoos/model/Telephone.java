@@ -6,8 +6,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "telephone")
-public class Telephone
-{
+public class Telephone extends Auditable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long phoneid;
@@ -20,60 +20,49 @@ public class Telephone
     @JsonIgnoreProperties("telephones")
     private Zoo zoo;
 
-    public Telephone()
-    {
+    public Telephone() {
     }
 
-    public Telephone(String phonetype, String phonenumber, Zoo zoo)
-    {
+    public Telephone(String phonetype, String phonenumber, Zoo zoo) {
         this.phonetype = phonetype;
         this.phonenumber = phonenumber;
         this.zoo = zoo;
     }
 
-    public long getPhoneid()
-    {
+    public long getPhoneid() {
         return phoneid;
     }
 
-    public void setPhoneid(long phoneid)
-    {
+    public void setPhoneid(long phoneid) {
         this.phoneid = phoneid;
     }
 
-    public String getPhonetype()
-    {
+    public String getPhonetype() {
         return phonetype;
     }
 
-    public void setPhonetype(String phonetype)
-    {
+    public void setPhonetype(String phonetype) {
         this.phonetype = phonetype;
     }
 
-    public String getPhonenumber()
-    {
+    public String getPhonenumber() {
         return phonenumber;
     }
 
-    public void setPhonenumber(String phonenumber)
-    {
+    public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
     }
 
-    public Zoo getZoo()
-    {
+    public Zoo getZoo() {
         return zoo;
     }
 
-    public void setZoo(Zoo zoo)
-    {
+    public void setZoo(Zoo zoo) {
         this.zoo = zoo;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Telephone{" + "phoneid=" + phoneid + ", phonetype='" + phonetype + '\'' + ", phonenumber='" + phonenumber + '\'' + ", zoo=" + zoo + '}';
     }
 }

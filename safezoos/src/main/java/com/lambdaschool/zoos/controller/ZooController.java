@@ -12,15 +12,38 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/zoos")
-public class ZooController
-{
+public class ZooController {
+
     @Autowired
     private ZooService zooService;
 
-    // GET: localhost:2019/zoos/zoos
-    @GetMapping(value = "/zoos", produces = {"application/json"})
-    public ResponseEntity<?> listAllZoos()
-    {
+    // localhost:2019/zoos/zoos
+    @GetMapping(value = "/zoos",
+            produces = {"application/json"})
+    public ResponseEntity<?> listAllZoos() {
         return new ResponseEntity<>(zooService.findAll(), HttpStatus.OK);
+    }
+
+    // localhost:2019/zoos/zoos/ADD_ID_NUMBER_HERE
+    // available ID numbers to test: 1, 2, 3, 4, 5
+    @GetMapping(value = "/zoos/{zooId}",
+            produces = {"application/json"})
+    public ResponseEntity<?> getZooById(
+            @PathVariable
+                    Long zooId) {
+        Zoo z = zooService.findZooById(zooId);
+        return new ResponseEntity<>(z, HttpStatus.OK);
+    }
+
+    // localhost:2019/zoos/ENTER_ZOO_NAME_HERE
+    // !!!REMEMBER!!! - URL Encoding Functions
+    // sample - localhost:2019/zoos/Smithsonian%20National%20Zoo
+    @GetMapping(value = "/{zooName}",
+            produces = {"application/json"})
+    public ResponseEntity<?> getZooByName(
+            @PathVariable
+                    String zooName) {
+        Zoo z = zooService.findZooByName(zooName);
+        return new ResponseEntity<>(z, HttpStatus.OK);
     }
 }

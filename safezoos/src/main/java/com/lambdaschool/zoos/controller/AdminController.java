@@ -16,32 +16,30 @@ import java.net.URISyntaxException;
 
 @RestController
 @RequestMapping("/admin")
-public class AdminController
-{
+public class AdminController {
+
     @Autowired
     ZooService zooService;
 
     @PutMapping(value = "/zoos/{id}",
-                produces = {"application/json"},
-                consumes = {"application/json"})
+            produces = {"application/json"},
+            consumes = {"application/json"})
     public ResponseEntity<?> updateZoo(
             @RequestBody
                     Zoo updateZoo,
             @PathVariable
-                    long id)
-    {
+                    long id) {
         zooService.update(updateZoo, id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // POST localhost:2019/admin/zoos
     @PostMapping(value = "/zoos",
-                 consumes = {"application/json"},
-                 produces = {"application/json"})
+            consumes = {"application/json"},
+            produces = {"application/json"})
     public ResponseEntity<?> addNewZoo(HttpServletRequest request, @Valid
     @RequestBody
-            Zoo newZoo) throws URISyntaxException
-    {
+            Zoo newZoo) throws URISyntaxException {
         newZoo = zooService.save(newZoo);
 
         // set the location header for the newly created resource
@@ -57,20 +55,29 @@ public class AdminController
     @DeleteMapping(value = "/zoos/{zooid}")
     public ResponseEntity<?> deleteZooById(
             @PathVariable
-                    long zooid)
-    {
+                    long zooid) {
         zooService.delete(zooid);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/zoos/{zooid}/animals/{animalid}")
+    public ResponseEntity<?> deleteZooAnimalCombo(
+            @PathVariable("zooid")
+                    long zooid,
+            @PathVariable("animalid")
+                    long animalid) {
+        zooService.deleteZooAnimalCombo(zooid, animalid);
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping(value = "/zoos/{zooid}/animals/{animalid}")
     public ResponseEntity<?> saveZooAnimalCombo(HttpServletRequest request,
-            @PathVariable("zooid")
-                    long zooid,
-            @PathVariable("animalid")
-                    long animalid)
-    {
-//        zooService.saveZooAnimalCombo(zooid, animalid);
+                                                @PathVariable("zooid")
+                                                        long zooid,
+                                                @PathVariable("animalid")
+                                                        long animalid) {
+        zooService.saveZooAnimalCombo(zooid, animalid);
 
         // set the location header for the newly created resource
         HttpHeaders responseHeaders = new HttpHeaders();
@@ -78,7 +85,7 @@ public class AdminController
         URI newZooURI = ServletUriComponentsBuilder.fromUriString(request.getServerName() + ":" + request.getLocalPort() + "/zoos/zoos/{zooid}").buildAndExpand(zooid).toUri();
         responseHeaders.setLocation(newZooURI);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(null, responseHeaders, HttpStatus.OK);
     }
 
 }
