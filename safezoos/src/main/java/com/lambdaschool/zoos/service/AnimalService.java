@@ -8,4 +8,6 @@ public interface AnimalService {
     ArrayList<Animal> findAll();
 
     Animal findAnimalByType(String type);
+
+    ArrayList<CountAnimalsInZoo> getAnimalinZooCount();
 }
